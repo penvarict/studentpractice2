@@ -1,7 +1,7 @@
 students =[]
 eye_colors = []
 ages = []
-
+bloodtype = []
 File.open("student_data.csv").each do |line|
 	info = line.split(",")
 	students.push(info[0].strip)
@@ -60,6 +60,16 @@ end
 
 ###
 
+def vowel_count(string)  #just check function, not part of problem
+	vowels = 0
+	string.each_char do |letters|
+		if letters.downcase == 'a' || letters.downcase== 'e' || letters.downcase == 'i' || letters.downcase == 'o' || letters.downcase == 'u'
+			vowels += 1
+		end
+	end
+	return vowels
+end
+
 def most_number_of_vowels(students, ages)   #check for age,push names to list, find count of vowels in each name with vowel count fucntion, sort out the highest one,return the student with the highest number of vowels
 	sophomore_names = []   	#empty list
 	name_with_most_vowels = ""
@@ -85,15 +95,7 @@ def most_number_of_vowels(students, ages)   #check for age,push names to list, f
 end
 
 
-def vowel_count(string)  #just check function, not part of problem
-	vowels = 0
-	string.each_char do |letters|
-		if letters.downcase == 'a' || letters.downcase== 'e' || letters.downcase == 'i' || letters.downcase == 'o' || letters.downcase == 'u'
-			vowels += 1
-		end
-	end
-	return vowels
-end
+
 
 
 def average_age_of_geye (ages, eye_colors)
