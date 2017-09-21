@@ -7,6 +7,7 @@ File.open("student_data.csv").each do |line|
 	students.push(info[0].strip)
 	eye_colors.push(info[1].strip)
 	ages.push(info[2].strip.to_i)
+	bloodtype.push(info[3].strip)
 end	
 
 
@@ -57,39 +58,60 @@ def list_of_green_eye_girls(eye_colors,students)
 end
 
 
-def most_number_of_vowels(students, ages)   #check for age,push names to list, find count of vowels in each name, sort out the highest one,return the student with the highest number of vowels
-	sophomore_names = []   	#empty list
-	vowel_count = 0				
-	max_vowel_count = 0
-	student_name_max = ""
-	number_of_a = 0
+###
 
-	students.each_with_index do |student, i|
-		if ages[i] == 15   #if ages at index i, (defined above) is fifteen add the name at that index to list
-			sophomore_names.push(students[i]) #push names of sophomores to sophmore names list
+def most_number_of_vowels(students, ages)   #check for age,push names to list, find count of vowels in each name with vowel count fucntion, sort out the highest one,return the student with the highest number of vowels
+	sophomore_names = []   	#empty list
+	name_with_most_vowels = ""
+	most_vowels = 0		
+
+	ages.each_with_index do |age, i|
+		if age == 15
+				sophomore_names.push(students[i])
+		end		
+
+	end
+
+	sophomore_names.each do |sophomore_names|
+		if vowel_count(sophomore_names)> most_vowels
+			most_vowels = vowel_count(sophomore_names)
+			name_with_most_vowels = sophomore_names
 		end
 	end
-	return sophomore_names
 
-	sophomore_names.chars.to_a.each_with_index do |sophomore_names, i| #count vowels ["name","name"]
-		#sophomore_name.chars.each_with_index do |char, i|
-		if chr == "a" || chr == "e" || chr == "i" || chr =="o" || chr == "u"
-			vowel_count[i] += 1 #vowel count = vc+1
-			elsif vowel_count[i] > max_vowel_count	#if the vowel count of the first name in the index is more than the max vowel count set that as the new max
-				sophomore_name[i] = student_name_max
-				
-			
-		end #end first if
-			
-		#end #end index func
+	return name_with_most_vowels
 
 
-	end	
+end
 
 
+def vowel_count(string)  #just check function, not part of problem
+	vowels = 0
+	string.each_char do |letters|
+		if letters.downcase == 'a' || letters.downcase== 'e' || letters.downcase == 'i' || letters.downcase == 'o' || letters.downcase == 'u'
+			vowels += 1
+		end
+	end
+	return vowels
+end
 
-	return student_name_max  
-	
+
+def average_age_of_geye (ages, eye_colors)
+	green_ages = []
+	average_age = 0
+	number = 0
+	eye_colors.each_with_index do |color, i|
+		if color.downcase == "green"
+			green_ages.push(ages[i]) #push ages to list
+			number += 1 #record number for average
+		end
+	end
+	green_ages.each do |age|
+		average_age += age
+	end
+	green_eye_average = average_age / number
+
+	return green_eye_average.to_i #return whole number
 end
 
 
@@ -97,11 +119,20 @@ end
 
 
 
+puts "the number of people with brwon eyes are"
 puts brown_eyes_count(eye_colors)
+
+puts "the number of students who can drive are"
 puts driving_age_count(ages)
+
+puts "the girls with green eyes are"
 puts list_of_green_eye_girls(eye_colors, students)
+
+
+puts "the name with most vowels is"
 print most_number_of_vowels(students, ages), "\n"
 
-#print most_number_of_vowels (students, age)  output=student
 
+puts "the average age of a green eyed student is"
+print average_age_of_geye(ages, eye_colors)
 
