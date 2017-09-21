@@ -101,17 +101,17 @@ end
 def average_age_of_geye (ages, eye_colors)
 	green_ages = []
 	average_age = 0
-	number = 0
+	number_of_students = 0
 	eye_colors.each_with_index do |color, i|
 		if color.downcase == "green"
 			green_ages.push(ages[i]) #push ages to list
-			number += 1 #record number for average
+			number_of_students += 1 #record number for average
 		end
 	end
 	green_ages.each do |age|
 		average_age += age
 	end
-	green_eye_average = average_age / number
+	green_eye_average = average_age / number_of_students
 
 	return green_eye_average.to_i #return whole number
 end
