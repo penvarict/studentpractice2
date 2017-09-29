@@ -102,8 +102,8 @@ def average_age_of_geye (ages, eye_colors)
 	green_ages = []
 	average_age = 0
 	number_of_students = 0
-	eye_colors.each_with_index do |color, i|
-		if color.downcase == "green"
+	eye_colors.each_with_index do |eye_colors, i|
+		if eye_colors.downcase == "green"
 			green_ages.push(ages[i]) #push ages to list
 			number_of_students += 1 #record number for average
 		end
@@ -115,6 +115,26 @@ def average_age_of_geye (ages, eye_colors)
 
 	return green_eye_average.to_i #return whole number
 end
+
+def geye_close_to_ave_age (ages, eye_colors, students)
+	distance_average = 90 #age
+	average_age_geye = average_age_of_geye(ages, eye_colors)
+	student = ""
+
+	eye_colors.each_with_index do |eye_colors, i|
+		distance_age = (ages[i] - distance_average).to_i
+		if eye_colors == "Green"	
+			puts "we got to here yo"
+			if distance_age < distance_average
+				distance_average = distance_age
+				student = students[i]
+			end
+		end
+	end
+
+	return student
+end
+
 
 
 
@@ -136,5 +156,7 @@ print most_number_of_vowels(students, ages), "\n"
 
 
 puts "the average age of a green eyed student is"
-print average_age_of_geye(ages, eye_colors)
+print average_age_of_geye(ages, eye_colors), "\n"
 
+puts "the green eyed student closest to the average age is "
+print geye_close_to_ave_age(ages, eye_colors, students), "\n"
