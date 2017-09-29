@@ -1,13 +1,13 @@
 students =[]
 eye_colors = []
 ages = []
-bloodtype = []
+bloodtypes = []
 File.open("student_data.csv").each do |line|
 	info = line.split(",")
 	students.push(info[0].strip)
 	eye_colors.push(info[1].strip)
 	ages.push(info[2].strip.to_i)
-	bloodtype.push(info[3].strip)
+	bloodtypes.push(info[3].strip)
 end	
 
 
@@ -134,36 +134,46 @@ def geye_close_to_ave_age (ages, eye_colors, students)
 	return student
 end
 
-def blood_donor(students, bloodtype,name_of_recip) #students/bloodtype are arrays, name is a name
-	student = 0
+def blood_donor(students, bloodtypes, name_of_recip) #students/bloodtype are arrays, nameofrecip is a name
+
 	recip_type = ""
+	acceptable_types = []
+
 	donors = []
-	blood_recip_needs = ""
-	students.each_with_index do |students, i|
-		if students == name_of_recip
-			recip_type = bloodtype[i]
+
+
+	students.each_with_index do |student, i|
+		if student == name_of_recip
+			recip_type = bloodtypes[i]
 		end
 	end
 
 	if recip_type == "A"
 
-		recip_type = "A", "AB"
+		acceptable_types = ["A", "AB"]
 
 	elsif recip_type == "B"
-		recip_type = "B", "AB"
+		acceptable_types = ["B", "AB"]
 
 	elsif recip_type == "AB"
-		recip_type = "AB"
+		acceptable_types = ["AB"]
 
 	elsif recip_type == "O"
-		recip_type = "A", "B", "O", "AB"
+		acceptable_types = ["O"]
 
 
 	end
+
+	# acceptable_blood_number = acceptable_types.count
 	
-	bloodtype.each_with_index do |bloodtype, i|
-		if bloodtype == recip_type
+	bloodtypes.each_with_index do |bloodtype, i|
+	
+
+		if  acceptable_types.include?(bloodtype) 
+
 			donors.push(students[i])
+		
+
 		end
 
 
@@ -174,8 +184,6 @@ def blood_donor(students, bloodtype,name_of_recip) #students/bloodtype are array
 
 
 end
-
-
 
 
 
@@ -201,4 +209,5 @@ print geye_close_to_ave_age(ages, eye_colors, students), "\n"
 
 
 puts "Bob needs blood from one of these people to not die"
-print blood_donor(students, bloodtype,"Bob")
+print blood_donor(students, bloodtypes,"Bob")
+
