@@ -124,7 +124,6 @@ def geye_close_to_ave_age (ages, eye_colors, students)
 	eye_colors.each_with_index do |eye_colors, i|
 		distance_age = (ages[i] - distance_average).to_i
 		if eye_colors == "Green"	
-			puts "we got to here yo"
 			if distance_age < distance_average
 				distance_average = distance_age
 				student = students[i]
