@@ -134,7 +134,46 @@ def geye_close_to_ave_age (ages, eye_colors, students)
 	return student
 end
 
+def blood_donor(students, bloodtype,name_of_recip) #students/bloodtype are arrays, name is a name
+	student = 0
+	recip_type = ""
+	donors = []
+	blood_recip_needs = ""
+	students.each_with_index do |students, i|
+		if students == name_of_recip
+			recip_type = bloodtype[i]
+		end
+	end
 
+	if recip_type == "A"
+
+		recip_type = "A", "AB"
+
+	elsif recip_type == "B"
+		recip_type = "B", "AB"
+
+	elsif recip_type == "AB"
+		recip_type = "AB"
+
+	elsif recip_type == "O"
+		recip_type = "A", "B", "O", "AB"
+
+
+	end
+	
+	bloodtype.each_with_index do |bloodtype, i|
+		if bloodtype == recip_type
+			donors.push(students[i])
+		end
+
+
+
+	end
+
+	return donors
+
+
+end
 
 
 
@@ -159,3 +198,7 @@ print average_age_of_geye(ages, eye_colors), "\n"
 
 puts "the green eyed student closest to the average age is "
 print geye_close_to_ave_age(ages, eye_colors, students), "\n"
+
+
+puts "Bob needs blood from one of these people to not die"
+print blood_donor(students, bloodtype,"Bob")
